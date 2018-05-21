@@ -1,6 +1,6 @@
 <template lang='pug'>
 .home
-    notice(msg='Hi, len')
+    notice(msg='Hi, Len!!!')
 </template>
 
 <script lang='ts'>

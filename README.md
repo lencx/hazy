@@ -17,7 +17,8 @@ vue create hazy
 
 cd hazy
 yarn
-yarn serve
+# yarn serve [--open]
+yarn dev
 ```
 
 </details>

@@ -17,15 +17,14 @@
     ],
     "paths": {
       "@/*": [
-        "src/*",
-        ""
+        "src/renderer/*"
       ]
     }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
+    "src/renderer/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
