@@ -5,22 +5,31 @@
   "description": "tools",
   "repository": "git@github.com:lencx/hazy.git",
   "author": "Len <cxin1314@gmail.com>",
-  "main": "./dist/entry.js",
+  "main": "./dist/main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "ts": "tsc ./src/main/entry.ts -w --outDir ./dist",
-    "dev": "cross-env NODE_ENV=development concurrently -r \"npm run ts\" \"npm run serve\" \"electron .\""
+    "dev": "cross-env NODE_ENV=development concurrently -rk \"npm run build:main -w;electron .;\" \"npm run serve\"",
+    "build:main": "tsc ./src/main/main.ts --outDir ./dist",
+    "build:all": "cross-env NODE_ENV=production concurrently -k \"npm run build\" \"npm run pack:main\""
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
   },
   "dependencies": {
+    "material-design-icons-iconfont": "^3.0.3",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
+    "vuetify": "^1.0.18",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -37,6 +46,7 @@
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.5",
     "electron": "^2.0.1",
+    "electron-builder": "^20.13.4",
     "node-sass": "^4.7.2",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",

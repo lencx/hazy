@@ -5,8 +5,7 @@
 ## Install
 
 <!-- @vue/cli -->
-<details>
-<summary>* @vue/cli</summary>
+* @vue/cli
 
 ```bash
 # yarn global add @vue/cli
@@ -16,21 +15,23 @@ npm i -g @vue/cli
 vue create hazy
 
 cd hazy
+
+# install all pack
 yarn
 # yarn serve [--open]
 yarn dev
 ```
 
-</details>
-
 <!-- template -->
 
-<details>
-<summary>* template</summary>
+* template
 
 ```bash
 yarn add pug pug-plain-loader --dev
-
 ```
 
-</details>
+* UI
+
+```bash
+yarn add vuetify material-design-icons-iconfont
+```

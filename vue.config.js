@@ -35,7 +35,10 @@ module.exports = {
         // },
         resolve: {
             alias: {
-                '@': resolve('src/renderer')
+                '@': resolve('src/renderer'),
+                '@a': resolve('src/renderer/assets'),
+                '@c': resolve('src/renderer/components'),
+                '@v': resolve('src/renderer/views')
             }
         }
     }

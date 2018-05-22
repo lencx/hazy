@@ -14,6 +14,9 @@ export default class Notice extends Vue {
 
 
 <style lang="scss">
+h1 {
+    margin: 0;
+}
 .notice {
     background: linear-gradient(to right, rgba(#000, .5), rgba(#fab, .5));
 }

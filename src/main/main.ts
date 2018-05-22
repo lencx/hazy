@@ -16,6 +16,10 @@ const winURI = process.env.NODE_ENV === 'development'
 
 let mainWin: any
 
+// https://github.com/electron/electron/pull/11810
+// https://github.com/electron/electron/issues/11970
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
+
 const createWin = () => {
     mainWin = new BrowserWindow({
         height: 800,

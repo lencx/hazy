@@ -1,13 +1,17 @@
 <template lang='pug'>
 #app
-    #nav
-        router-link(to='/') Home3
+    //- #nav
+    //-     router-link(to='/') Home
     router-view
 </template>
 
 <style lang="scss">
+body {
+    margin: 0;
+    padding: 0;
+}
 #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'PingFang SC', Roboto, Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
