@@ -1,5 +1,5 @@
 directories:
-  output: build
+  output: package
   buildResources: build
 productName: hazy
 appId: com.lencx.hazy
@@ -23,10 +23,3 @@ linux:
   icon: build/icons/icon
 
 electronVersion: 2.0.2
-
-# https://github.com/fwouts/electron-vue-typescript-starter/blob/master/package.json
-# http://www.debug8.com/javascript/t_8944.html
-# https://github.com/mubaidr/vue-electron-template/blob/master/src/main/index.js
-# https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md
-# https://alligator.io/vuejs/using-new-vue-cli-3/
-# http://blog.diepartments.de/webvr-webgl-vue-js-2-0-and-aframe-js-a-sweet-couple/

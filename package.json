@@ -12,16 +12,16 @@
 
     "build:main": "tsc ./src/main/main.ts --outDir ./dist",
     "build:all": "cross-env NODE_ENV=production concurrently \"npm run build;\" \"npm run build:main\"",
-    "pack": "electron-builder --dir ./dist",
+    "pack": "electron-builder --dir",
     
     "dev": "cross-env NODE_ENV=development concurrently -rk \"npm run build:main -w; electron .;\" \"npm run serve\"",
-    "mac": "electron-builder"
+    "dist": "electron-builder --platform=all"
   },
   "build": {
     "productName": "hazy",
     "appId": "com.lencx.hazy",
     "directories": {
-      "output": "build"
+      "output": "package"
     },
     "files": [
       "dist/**/*"

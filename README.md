@@ -48,3 +48,12 @@ yarn add electron-builder --dev
 ```bash
 yarn add concurrently cross-env --dev
 ```
+
+## pack
+
+```bash
+builder -mwl
+builder --platform=all
+electron-builder -mwl
+electron-builder --platform=all
+```
