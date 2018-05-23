@@ -5,6 +5,7 @@ const resolve = dir => path.resolve(__dirname, dir)
 
 module.exports = {
     baseUrl: resolve('src/renderer'),
+    outputDir: 'dist',
     devServer: {
         // open: process.platform === 'darwin',
         open: false,
@@ -30,9 +31,10 @@ module.exports = {
     // }
     configureWebpack: {
         entry: resolve('src/renderer/main.ts'),
-        // output: {
-        //     path: __dirname + "/cool-build"
-        // },
+        output: {
+            path: resolve('dist'),
+            publicPath: '/'
+        },
         resolve: {
             alias: {
                 '@': resolve('src/renderer'),
@@ -43,3 +45,6 @@ module.exports = {
         }
     }
 }
+
+// yarn add pug pug-plain-loader --dev
+// yarn add material-design-icons-iconfont vuetify

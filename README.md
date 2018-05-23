@@ -35,3 +35,16 @@ yarn add pug pug-plain-loader --dev
 ```bash
 yarn add vuetify material-design-icons-iconfont
 ```
+
+* Electron
+
+```bash
+npm i electron --save-dev
+yarn add electron-builder --dev
+```
+
+* ENV
+
+```bash
+yarn add concurrently cross-env --dev
+```
