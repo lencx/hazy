@@ -4,7 +4,7 @@ directories:
 productName: hazy
 appId: com.lencx.hazy
 files:
-  - dist/**/*
+  - /dist/**/*
 dmg:
   contents:
     - x: 410

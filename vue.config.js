@@ -33,7 +33,7 @@ module.exports = {
         entry: resolve('src/renderer/main.ts'),
         output: {
             path: resolve('dist'),
-            publicPath: '/'
+            publicPath: './'
         },
         resolve: {
             alias: {
