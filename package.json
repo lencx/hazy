@@ -9,12 +9,14 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
+    "mv:font": "shx mv ./dist/fonts ./dist/css",
+    "clear": "shx rm -rf package",
 
     "build:main": "tsc ./src/main/main.ts --outDir ./dist",
-    "build:all": "cross-env NODE_ENV=production concurrently \"npm run build; npm run build:main\"",
+    "build:all": "cross-env NODE_ENV=production concurrently \"npm run build; npm run mv:font; npm run build:main;\"",
     "pack": "electron-builder --dir",
-    
     "dev": "cross-env NODE_ENV=development concurrently -rk \"npm run build:main -w; electron .;\" \"npm run serve\"",
+
     "dist": "electron-builder --platform=all",
     "mac": "electron-builder -m",
     "linux": "electron-builder -l",
@@ -83,6 +85,7 @@
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.0.1",
+    "shx": "^0.2.2",
     "vue-template-compiler": "^2.5.16"
   },
   "browserslist": [
