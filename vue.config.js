@@ -3,6 +3,9 @@ const path = require('path')
 
 const resolve = dir => path.resolve(__dirname, dir)
 
+const publicPath = process.env.NODE_ENV === 'development'
+    ? '/' : './'
+
 module.exports = {
     baseUrl: resolve('src/renderer'),
     outputDir: 'dist',
@@ -25,15 +28,11 @@ module.exports = {
         }
     },
     lintOnSave: true,
-    // chainWebpack: config => {
-    //     config.resolve.alias
-    //         .set('@', resolve('src/renderer'))
-    // }
     configureWebpack: {
         entry: resolve('src/renderer/main.ts'),
         output: {
             path: resolve('dist'),
-            publicPath: './'
+            publicPath
         },
         resolve: {
             alias: {
@@ -45,6 +44,3 @@ module.exports = {
         }
     }
 }
-
-// yarn add pug pug-plain-loader --dev
-// yarn add material-design-icons-iconfont vuetify
