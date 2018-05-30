@@ -15,3 +15,10 @@ new Vue({
     store,
     render: h => h(App),
 }).$mount('#app')
+
+
+import tr from './utils/translate'
+// tslint:disable-next-line:prefer-const
+let t = tr('你好')
+// tslint:disable-next-line:no-console
+console.log(t)
