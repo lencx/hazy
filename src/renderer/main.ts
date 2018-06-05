@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import axios from 'axios'
+import Axios from 'axios'
 import App from './App.vue'
 
 import './core/ui'
@@ -8,7 +8,11 @@ import router from './core/router'
 import store from './core/store'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios
+Vue.prototype.$http = Axios
+// Vue.use()
+
+// tslint:disable-next-line:no-console
+// console.log(Vue)
 
 new Vue({
     router,
@@ -17,8 +21,13 @@ new Vue({
 }).$mount('#app')
 
 
-import tr from './utils/translate'
+// import translate from './utils/translate'
 // tslint:disable-next-line:prefer-const
-let t = tr('你好')
+// let t = translate('你好吗？')
 // tslint:disable-next-line:no-console
-console.log(t)
+// console.log(t)
+
+// import tk from './utils/translate/tk'
+// tslint:disable-next-line:no-console
+// console.log('tkk: ', tk('你好'))
+

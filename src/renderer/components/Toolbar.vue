@@ -11,4 +11,21 @@
                     v-icon favorite
                 v-btn(icon)
                     v-icon more
+        button(@click='say("Hello!")') Click Me
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import translate from './../utils/translate'
+import axios from 'axios'
+
+@Component
+export default class Toolbar extends Vue {
+
+    private say(content: string) {
+        // tslint:disable-next-line:no-console
+        alert(content)
+    }
+}
+
+</script>

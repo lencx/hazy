@@ -1,4 +1,4 @@
-interface ILangs {
+export interface ILangs {
     [key: string]: any;
 }
 
