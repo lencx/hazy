@@ -16,8 +16,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import translate from './../utils/translate'
-import axios from 'axios'
 
 @Component
 export default class Toolbar extends Vue {

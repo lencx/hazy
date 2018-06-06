@@ -2,15 +2,15 @@
 .home
     //- notice(msg='Hi, Len!!!')
     //- tree
-    toolbar
+    //- toolbar
     g-translate
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import Notice from '@c/Notice.vue'
-import Tree from '@c/Tree.vue'
-import Toolbar from '@c/Toolbar.vue'
+import Notice from '@c/common/Notice.vue'
+import Tree from '@c/common/Tree.vue'
+import Toolbar from '@c/common/Toolbar.vue'
 import gTranslate from '@c/translate/GTranslate.vue'
 
 /* tslint:disable:no-console */
