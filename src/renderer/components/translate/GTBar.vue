@@ -1,30 +1,29 @@
 <template lang='pug'>
 .gt-bar
     v-layout(row, wrap, align-center)
-        v-btn-toggle(v-model='toggleExclusive')
+        v-btn-toggle(v-model='currectLang')
             v-btn(
                 v-for=`(item, i) in langsDef`,
                 :key=`i`,
-                @click=`sheet = false`,
                 :data-lang=`item.lang`
             ) {{item}}
-        v-bottom-sheet(v-model='sheet', data-app)
+        v-btn Auto
+        v-bottom-sheet(v-model='isOpen', data-app)
             v-btn.gt-lang-btn(
-                small, round,
                 slot='activator',
                 color='blue',
-                @click=`isShow=!isShow`
+                @click=`isOpen = !isOpen`
             )
                 | MORE
-                v-icon(dark, :class=`sheet ? 'arrow-active' : ''`) chevron_right
+                v-icon(dark, :class=`isOpen ? 'arrow-active' : ''`) chevron_right
             v-subheader Language
             v-list-tile(
                 v-for=`(lang, i) in langs`,
                 :key=`i`,
-                @click=`sheet = false; isShow = false; chooseLang=i`
+                @click=`isOpen = false;  selectedLang(i); chooseLang = i`
             ) {{langsCN[i]}}
 
-            h2 {{chooseLang}}
+        h2 {{chooseLang}}
 </template>
 
 <script lang='ts'>
@@ -33,25 +32,49 @@ import { langs, langsCN, langsDef } from './../../utils/translate/lang'
 
 @Component
 export default class GTBar extends Vue {
-    private toggleExclusive = null
-    private isShow = false
-    private sheet = false
+    // current language
+    private currectLang = null
+    // language list status
+    private isOpen = false
+    // language - english
     private langs = langs
+    // language - Chinese
     private langsCN = langsCN
+    // default language
     private langsDef = langsDef
+    // choose a language
     private chooseLang = ''
 
-    // private computed() { }
+    private selectedLang(lang: string) {
+        let ldef = this.langsDef
+        const langArr = Object.keys(ldef)
+        let isDel = true
+        langArr.forEach(i => {
+            if (i === lang || lang === 'auto') {
+                return isDel = false
+            }
+        })
+        if (langArr.length === 3 && isDel) {
+            delete ldef[langArr[0]]
+            return ldef = Object.assign(ldef, {[lang]: langs[lang]})
+        }
+    }
 }
 </script>
 
 <style lang='scss'>
-@import '../../scss/variable';
+@import '../../scss/main';
 .gt-bar {
+    margin: 10px;
+    .btn-toggle {
+        &, button:first-child {
+            @include roundLeft(8px);
+        }
+    }
     button {
         text-transform: capitalize;
     }
-    .dialog {
+    .bottom-sheet.dialog {
         overflow-y: auto;
         background: #f4f4f4;
         .list__tile {
@@ -67,6 +90,8 @@ export default class GTBar extends Vue {
     }
     .gt-lang-btn {
         margin: 0;
+        width: 50px !important;
+        @include roundRight(8px);
     }
 }
 </style>

@@ -3,19 +3,21 @@
     gt-bar
     v-layout(row)
         v-flex.gt-origin(xs5)
-            gt-input(@updateTxt='getData()')
+            gt-input(
+                ref='gtinput'
+                @updateTxt=`getData()`,
+            )
         v-flex.gt-target(xs5)
-            p {{translateText}} - 1
+            p {{translateText}}
 </template>
-
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import Debounce from './../../utils/debounce'
-import axios from 'axios'
 import translate from './../../utils/translate'
 import GtInput from './GTInput.vue'
 import GtBar from './GTBar.vue'
+import API from './../../api'
 
 @Component({
     components: {
@@ -24,32 +26,20 @@ import GtBar from './GTBar.vue'
     },
 })
 
-
 export default class GTranslate extends Vue {
     private translateText = ''
 
     @Debounce(1500)
-    private getData() {
-        axios.get(translate(this.$store.state.gTranslate.text, {to: 'zh-tw'}))
-            .then(data => data.data)
-            .then(data => {
+    private getData(this: any) {
+        this.$http.get(translate(this.$refs.gtinput.text, {
+            url: API.gTranslate,
+            to: 'zh-tw',
+        }))
+            .then((data: any) => data.data)
+            .then((data: string[]) => {
                 this.translateText = data
             })
     }
-
-
-
-    // private mounted() {
-    //     // tslint:disable-next-line:no-console
-    //     console.log(this.$store.state.gTranslate.text)
-    //     axios.get(translate(this.$store.state.gTranslate.text, {to: 'zh-tw'}))
-    //         .then(data => data.data)
-    //         .then(data => {
-    //             this.translateText = data
-    //         })
-    //     // tslint:disable-next-line:no-console
-    //     console.log(this.$store.state)
-    // }
 }
 </script>
 

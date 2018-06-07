@@ -11,8 +11,8 @@
         color='pink',
         label='Please enter',
         textarea,
-        loading='false',
-        v-model.lazy='text'
+        loading=`false`,
+        v-model.lazy=`text`
     )
         //- :get_text.sync='text'
         //- @change='getText',
@@ -30,9 +30,9 @@ export default class InputTxt extends Vue {
     private getText() {
         // getSleep(1500)
         // tslint:disable-next-line:no-console
-        console.log(this.$store.state.gTranslate.text)
-        this.$emit('updateTxt', this.text)
-        return this.$store.state.gTranslate.text = this.text
+        // console.log(this.$store.state.gTranslate.text)
+        return this.$emit('updateTxt', this.text)
+        // return this.$store.state.gTranslate.text = this.text
     }
 }
 </script>

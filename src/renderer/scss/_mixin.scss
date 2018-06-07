@@ -1,0 +1,20 @@
+@mixin roundDeg($deg, $size) {
+    border-#{$deg}-radius: $size;
+}
+
+@mixin roundLeft($size) {
+    @include roundDeg('top-left', $size);
+    @include roundDeg('bottom-left', $size);
+}
+@mixin roundTop($size) {
+    @include roundDeg('top-left', $size);
+    @include roundDeg('top-right', $size);
+}
+@mixin roundRight($size) {
+    @include roundDeg('top-right', $size);
+    @include roundDeg('bottom-right', $size);
+}
+@mixin roundBottom($size) {
+    @include roundDeg('bottom-left', $size);
+    @include roundDeg('bottom-right', $size);
+}
