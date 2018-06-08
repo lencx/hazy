@@ -4,7 +4,8 @@ export interface ILangs {
 
 // tslint:disable:jsdoc-format
 /**
-document.querySelectorAll('#gt-sl-gms-menu .goog-menuitem-content')
+Array.from(document.querySelectorAll('#gt-sl-gms-menu .goog-menuitem-content'))
+    .reduce((acc, curr) => (typeof acc==='object' ? `${acc.textContent}, ` : acc) + `${curr.textContent}, `)
 检测语言,阿尔巴尼亚语,阿拉伯语,阿姆哈拉语,阿塞拜疆语,爱尔兰语,爱沙尼亚语,
 巴斯克语,白俄罗斯语,保加利亚语,冰岛语,波兰语,波斯尼亚语,波斯语,布尔语(南非荷兰语),
 丹麦语,德语,俄语,法语,菲律宾语,芬兰语,弗里西语,高棉语,格鲁吉亚语,古吉拉特语,哈萨克语,
@@ -135,6 +136,7 @@ const langsCN: ILangs = {
 }
 
 // language - english
+// https://cloud.google.com/translate/docs/languages
 const langs: ILangs = {
     'auto': 'Automatic',
     'af': 'Afrikaans',

@@ -20,11 +20,12 @@ module.exports = {
         //     // app is an express instance
         // },
         proxy: {
-            '/tr/*': {
+            '/gt/*': {
                 target: 'https://translate.google.cn',
                 xfwd: true,
                 changeOrigin: true,
-                pathRewrite: {'^/tr/*': 'translate_a/single'}
+                pathRewrite: {'^/gt/*': ''}
+                // pathRewrite: {'^/gt/*': 'translate_a/single'}
             }
         }
     },

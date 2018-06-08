@@ -4,7 +4,6 @@
 
 ## Install
 
-<!-- @vue/cli -->
 * @vue/cli
 
 ```bash
@@ -22,12 +21,16 @@ yarn
 yarn dev
 ```
 
-<!-- template -->
-
 * template
 
 ```bash
 yarn add pug pug-plain-loader --dev
+```
+
+* Production dependencies
+
+```bash
+yarn add axios vue-axios vue-class-component vue-property-decorator
 ```
 
 * UI
@@ -43,10 +46,10 @@ npm i electron --save-dev
 yarn add electron-builder --dev
 ```
 
-* ENV
+* Helper package
 
 ```bash
-yarn add concurrently cross-env --dev
+yarn add concurrently cross-env shx --dev
 ```
 
 ## pack
@@ -57,3 +60,9 @@ builder --platform=all
 electron-builder -mwl
 electron-builder --platform=all
 ```
+
+## TODO
+
+* [ ] Google Translate
+* [ ] LaTeX
+* [ ] Calculator
