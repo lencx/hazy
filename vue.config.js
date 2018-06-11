@@ -21,8 +21,9 @@ module.exports = {
         // },
         proxy: {
             '/gt/*': {
-                target: 'https://translate.google.cn',
-                xfwd: true,
+                target: 'http://translate.google.cn',
+                // xfwd: true,
+                // secure: false,
                 changeOrigin: true,
                 pathRewrite: {'^/gt/*': ''}
                 // pathRewrite: {'^/gt/*': 'translate_a/single'}

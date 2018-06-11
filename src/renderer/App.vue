@@ -8,7 +8,7 @@
 <style lang="scss">
 body {
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 #app {
     font-family: 'PingFang SC', Roboto, Avenir, Helvetica, Arial, sans-serif;

@@ -12,7 +12,8 @@
         label='Please enter',
         textarea,
         loading=`false`,
-        v-model.lazy=`text`
+        v-model.lazy=`text`,
+        counter=5000
     )
         //- :get_text.sync='text'
         //- @change='getText',

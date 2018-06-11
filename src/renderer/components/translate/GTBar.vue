@@ -1,13 +1,14 @@
 <template lang='pug'>
 .gt-bar
     v-layout(row, wrap, align-center)
-        v-btn-toggle(v-model='currectLang')
+        // v-btn-toggle(v-model='currectLang')
+        .def-lang-btn
             v-btn(
                 v-for=`(item, i) in langsDef`,
                 :key=`i`,
                 :data-lang=`item.lang`
             ) {{item}}
-        v-btn Auto
+            v-btn.gt-auto-btn Auto
         v-bottom-sheet(v-model='isOpen', data-app)
             v-btn.gt-lang-btn(
                 slot='activator',
@@ -65,14 +66,24 @@ export default class GTBar extends Vue {
 <style lang='scss'>
 @import '../../scss/main';
 .gt-bar {
+    // width: 50%;
     margin: 10px;
-    .btn-toggle {
-        &, button:first-child {
-            @include roundLeft(8px);
+    // .btn-toggle {
+    //     &, button:first-child {
+    //         @include roundLeft(8px);
+    //     }
+    // }
+    .def-lang-btn {
+        button {
+            text-transform: capitalize;
+            margin: 0;
+            &:first-child {
+                @include roundLeft(8px);
+            }
         }
-    }
-    button {
-        text-transform: capitalize;
+        .gt-auto-btn {
+            @include roundRight(8px);
+        }
     }
     .bottom-sheet.dialog {
         overflow-y: auto;
@@ -89,9 +100,11 @@ export default class GTBar extends Vue {
         transform: rotateZ(90deg);
     }
     .gt-lang-btn {
-        margin: 0;
-        width: 50px !important;
-        @include roundRight(8px);
+        // margin: 0;
+        // width: 50px !important;
+        // @include roundRight(8px);
+        border-radius: 8px;
+        color: #fff;
     }
 }
 </style>
