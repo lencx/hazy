@@ -13,7 +13,7 @@
         textarea,
         loading=`false`,
         v-model.lazy=`text`,
-        counter=5000
+        counter=5000,
     )
         //- :get_text.sync='text'
         //- @change='getText',
@@ -40,6 +40,7 @@ export default class InputTxt extends Vue {
 
 <style lang='scss'>
 .gt-box {
+    width: 100%;
     .input-group__input {
         border: solid 3px #666;
         border-radius: 8px !important;

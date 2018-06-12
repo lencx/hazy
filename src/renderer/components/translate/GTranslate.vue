@@ -3,7 +3,7 @@
     gt-bar
     .gt-origin
         gt-input(
-            ref='gtinput'
+            ref='gtinput',
             @updateTxt=`getData()`,
         )
         .voice
@@ -11,6 +11,7 @@
                 v-icon volume_up
             audio(ref='audioRef', :src=`audioURI`)
     .gt-target
+        p(v-for=`item in translateText.examples`, v-html=`item`)
         p {{translateText}}
 </template>
 
@@ -22,7 +23,7 @@ import GtBar from './GTBar.vue'
 
 import API from './../../api'
 import Debounce from './../../utils/debounce'
-import { translate, getGTAudio } from './../../utils/translate'
+import { translate, getGTAudio, formatGTData } from './../../utils/translate'
 
 // tslint:disable:no-console
 const gtHeader = {
@@ -53,15 +54,12 @@ export default class GTranslate extends Vue {
 
         this.$http.get(translate(txt, {
                 url: API.gTranslateText,
-                // from: 'en',
-                // to: 'zh-tw',
-                to: 'en',
-                from: 'zh-tw',
+                from: 'en',
+                to: 'zh-cn',
+                // to: 'en',
+                // from: 'zh-tw',
             }), gtHeader)
-            .then((data: any) => data.data)
-            .then((data: string[]) => {
-                this.translateText = data
-            })
+            .then((data: any) => this.translateText = formatGTData(data.data))
 
         // this.audioURI = '/hello.mp3'
         this.audioURI = API.gTranslateAudio + getGTAudio(txt)

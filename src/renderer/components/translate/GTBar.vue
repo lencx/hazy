@@ -1,27 +1,29 @@
 <template lang='pug'>
 .gt-bar
     v-layout(row, wrap, align-center)
-        // v-btn-toggle(v-model='currectLang')
-        .def-lang-btn
-            v-btn(
-                v-for=`(item, i) in langsDef`,
-                :key=`i`,
-                :data-lang=`item.lang`
-            ) {{item}}
-            v-btn.gt-auto-btn Auto
+        v-btn-toggle(v-model='currectLang')
+            .def-lang-btn
+                v-btn(
+                    v-for=`(item, i) in langsDef`,
+                    :key=`i`,
+                    :data-lang=`item.lang`,
+                    flat,
+                ) {{item}}
+                v-btn(flat).gt-auto-btn Auto
         v-bottom-sheet(v-model='isOpen', data-app)
             v-btn.gt-lang-btn(
+                icon,
                 slot='activator',
-                color='blue',
-                @click=`isOpen = !isOpen`
+                color='cyan',
+                :class=`isOpen ? 'arrow-active' : ''`
+                @click=`isOpen = !isOpen`,
             )
-                | MORE
-                v-icon(dark, :class=`isOpen ? 'arrow-active' : ''`) chevron_right
+                v-icon more
             v-subheader Language
             v-list-tile(
                 v-for=`(lang, i) in langs`,
                 :key=`i`,
-                @click=`isOpen = false;  selectedLang(i); chooseLang = i`
+                @click=`isOpen = false;  selectedLang(i); chooseLang = i`,
             ) {{langsCN[i]}}
 
         h2 {{chooseLang}}
@@ -50,11 +52,8 @@ export default class GTBar extends Vue {
         let ldef = this.langsDef
         const langArr = Object.keys(ldef)
         let isDel = true
-        langArr.forEach(i => {
-            if (i === lang || lang === 'auto') {
-                return isDel = false
-            }
-        })
+        langArr.forEach(i => (i === lang || lang === 'auto') ? isDel = false : void 0)
+
         if (langArr.length === 3 && isDel) {
             delete ldef[langArr[0]]
             return ldef = Object.assign(ldef, {[lang]: langs[lang]})
@@ -66,24 +65,10 @@ export default class GTBar extends Vue {
 <style lang='scss'>
 @import '../../scss/main';
 .gt-bar {
-    // width: 50%;
+    width: 100%;
     margin: 10px;
-    // .btn-toggle {
-    //     &, button:first-child {
-    //         @include roundLeft(8px);
-    //     }
-    // }
-    .def-lang-btn {
-        button {
-            text-transform: capitalize;
-            margin: 0;
-            &:first-child {
-                @include roundLeft(8px);
-            }
-        }
-        .gt-auto-btn {
-            @include roundRight(8px);
-        }
+    button {
+        text-transform: capitalize;
     }
     .bottom-sheet.dialog {
         overflow-y: auto;
@@ -97,14 +82,11 @@ export default class GTBar extends Vue {
         }
     }
     .arrow-active {
-        transform: rotateZ(90deg);
+        background-color: #929292 !important;
     }
     .gt-lang-btn {
-        // margin: 0;
-        // width: 50px !important;
-        // @include roundRight(8px);
-        border-radius: 8px;
         color: #fff;
+        box-shadow: 0 0 5px rgba(#000, .5);
     }
 }
 </style>

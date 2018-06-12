@@ -1,6 +1,6 @@
 <template lang='pug'>
 .home
-    .slidbar
+    .lx-slidbar
         v-navigation-drawer(
             :mini-variant.sync="mini",
             v-model="drawer",
@@ -10,7 +10,7 @@
                 v-list.pa-0
                     v-list-tile(avatar)
                         v-list-tile-avatar
-                            img(src='logo.png')
+                            img.logo(src='logo.png')
                         v-list-tile-content
                             v-list-tile-title
                                 h2 Hazy
@@ -22,16 +22,15 @@
                 v-list-tile.menu-item(
                     v-for=`item in menus`,
                     :key=`item.title`,
-                    @click=`mini = !mini`
                 )
                     v-list-tile-action
-                        v-icon {{item.icon}}
+                        v-icon(@click=`mini = !mini`) {{item.icon}}
                     v-list-tile-content
                         v-list-tile-title {{item.title}}
     //- notice(msg='Hi, Len!!!')
     //- tree
     //- toolbar
-    .container(:class=`!mini ? 'open' : ''`)
+    .lx-container(:class=`!mini ? 'open' : ''`)
         g-translate
 </template>
 
@@ -73,13 +72,26 @@ export default class Home extends Vue {
     >div {
         float: left;
     }
-    .slidbar {
-        height: calc(100vh - 20px);
+    .lx-slidbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100vh;
+        z-index: 9;
+        box-shadow: 1px 2px 8px rgba(#000, .6);
+        background-color: #f4f4f4;
+        .logo {
+            border: solid 1px #aaa;
+        }
     }
-    .container {
-        width: calc(100% - 80px);
+    .lx-container {
+        width: calc(100% - 120px);
+        transition: all 500ms ease;
+        margin-left: 120px;
         &.open {
-            width: calc(100% - 300px);
+            width: calc(100% - 340px);
+            margin-left: 340px;
         }
     }
     .menu-item {
