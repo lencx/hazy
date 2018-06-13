@@ -28,7 +28,7 @@ const langsDef: ILangs = {
 
 // language - chinese
 const langsCN: ILangs = {
-    'auto': '自动',
+    // 'auto': '自动',
     'af': '布尔语(南非荷兰语)',
     'sq': '	阿尔巴尼亚语',
     'am': '阿姆哈拉语',
@@ -138,7 +138,7 @@ const langsCN: ILangs = {
 // language - english
 // https://cloud.google.com/translate/docs/languages
 const langs: ILangs = {
-    'auto': 'Automatic',
+    // 'auto': 'Automatic',
     'af': 'Afrikaans',
     'sq': 'Albanian',
     'am': 'Amharic',

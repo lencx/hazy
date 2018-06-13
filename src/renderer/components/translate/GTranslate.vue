@@ -1,22 +1,31 @@
 <template lang="pug">
 .gt-translate
-    gt-bar
+    gt-bar(
+        ref='gtBarFrom',
+        @updateLang=`getData()`,
+    )
     .gt-origin
         gt-input(
-            ref='gtinput',
+            ref='gtInput',
             @updateTxt=`getData()`,
         )
         .voice
             v-btn(@click=`getAudio()`)
                 v-icon volume_up
             audio(ref='audioRef', :src=`audioURI`)
+    gt-bar(
+        ref='gtBarTo',
+        @updateLang=`getData()`,
+    )
     .gt-target
+        h2 Examples:
         p(v-for=`item in translateText.examples`, v-html=`item`)
+        hr
         p {{translateText}}
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 
 import GtInput from './GTInput.vue'
 import GtBar from './GTBar.vue'
@@ -34,8 +43,8 @@ const gtHeader = {
 
 @Component({
     components: {
-        GtInput,
         GtBar,
+        GtInput,
     },
 })
 
@@ -45,7 +54,9 @@ export default class GTranslate extends Vue {
 
     @Debounce(1500)
     private getData(this: any) {
-        const txt = this.$refs.gtinput.text
+        const txt = this.$refs.gtInput.text
+        const fromLang = this.$refs.gtBarFrom.currLang
+        const toLang = this.$refs.gtBarTo.currLang
 
         if (txt === '') {
             this.translateText = ''
@@ -54,8 +65,8 @@ export default class GTranslate extends Vue {
 
         this.$http.get(translate(txt, {
                 url: API.gTranslateText,
-                from: 'en',
-                to: 'zh-cn',
+                from: fromLang,
+                to: toLang,
                 // to: 'en',
                 // from: 'zh-tw',
             }), gtHeader)

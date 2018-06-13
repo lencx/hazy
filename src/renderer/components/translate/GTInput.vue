@@ -1,11 +1,5 @@
 <template lang="pug">
 .gt-area
-    //- v-card(color='grey darken-3', flat)
-    //- v-card(color='grey lighten-4', flat)
-    //-     v-card-text
-    //-         v-container(fluid)
-    //-             v-layout(row)
-    //-                 v-flex(xs12)
     v-text-field.gt-box(
         name='g-translate',
         color='pink',
@@ -15,8 +9,6 @@
         v-model.lazy=`text`,
         counter=5000,
     )
-        //- :get_text.sync='text'
-        //- @change='getText',
 </template>
 
 <script lang="ts">
@@ -24,16 +16,12 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 
 
 @Component
-export default class InputTxt extends Vue {
+export default class GTInput extends Vue {
     private text = ''
 
     @Watch('text')
     private getText() {
-        // getSleep(1500)
-        // tslint:disable-next-line:no-console
-        // console.log(this.$store.state.gTranslate.text)
-        return this.$emit('updateTxt', this.text)
-        // return this.$store.state.gTranslate.text = this.text
+        this.$emit('updateTxt', this.text)
     }
 }
 </script>

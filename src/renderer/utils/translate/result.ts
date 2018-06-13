@@ -3,9 +3,6 @@
 import _ from 'lodash'
 import { IRawResult } from './types'
 
-const objHasProp = (obj: object, prop: string, val: string) => val !== undefined
-    ? Object.assign(obj, {[prop]: val}) : ''
-
 export default function formatGTData(data: any): IRawResult {
     const { src, sentences, dict, examples } = data
 
@@ -17,9 +14,10 @@ export default function formatGTData(data: any): IRawResult {
         },
     }
 
-    // sentences
-    objHasProp(obj.sentences, 'src_translit', sentences[1].src_translit)
-    objHasProp(obj.sentences, 'translit', sentences[1].translit)
+    // sentences translit
+    if (sentences[1] !== undefined) {
+        Object.assign(obj.sentences, {src_translit: sentences[1].src_translit, translit: sentences[1].translit})
+    }
 
     // dict
     if (dict !== undefined) {

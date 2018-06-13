@@ -1,20 +1,25 @@
 <template lang='pug'>
 .gt-bar
     v-layout(row, wrap, align-center)
-        v-btn-toggle(v-model='currectLang')
+        v-btn-toggle(v-model='langBtns')
             .def-lang-btn
                 v-btn(
+                    flat,
                     v-for=`(item, i) in langsDef`,
                     :key=`i`,
-                    :data-lang=`item.lang`,
-                    flat,
+                    @click=`chooseLang(currLang, i)`,
+                    :disabled=`enableBtn(i, currLang)`,
                 ) {{item}}
-                v-btn(flat).gt-auto-btn Auto
+                v-btn.gt-auto-btn(
+                    flat,
+                    @click=`chooseLang(currLang, 'auto')`,
+                    :disabled=`enableBtn('auto', currLang)`,
+                ) Auto
         v-bottom-sheet(v-model='isOpen', data-app)
             v-btn.gt-lang-btn(
                 icon,
-                slot='activator',
                 color='cyan',
+                slot='activator',
                 :class=`isOpen ? 'arrow-active' : ''`
                 @click=`isOpen = !isOpen`,
             )
@@ -23,20 +28,23 @@
             v-list-tile(
                 v-for=`(lang, i) in langs`,
                 :key=`i`,
-                @click=`isOpen = false;  selectedLang(i); chooseLang = i`,
-            ) {{langsCN[i]}}
+                @click=`isOpen = false; currLang = i; selectedLang(currLang);`,
+            ) {{langs[i]}}-{{i}}
 
-        h2 {{chooseLang}}
+        h2 {{currLang}}
 </template>
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator'
 import { langs, langsCN, langsDef } from './../../utils/translate/lang'
+import Debounce from '../../utils/debounce';
 
 @Component
 export default class GTBar extends Vue {
+    private langBtns: number = 3
+
     // current language
-    private currectLang = null
+    private currLang = 'auto'
     // language list status
     private isOpen = false
     // language - english
@@ -45,19 +53,32 @@ export default class GTBar extends Vue {
     private langsCN = langsCN
     // default language
     private langsDef = langsDef
-    // choose a language
-    private chooseLang = ''
 
     private selectedLang(lang: string) {
-        let ldef = this.langsDef
-        const langArr = Object.keys(ldef)
+        const langArr = Object.keys(this.langsDef)
         let isDel = true
-        langArr.forEach(i => (i === lang || lang === 'auto') ? isDel = false : void 0)
+        langArr.forEach(i => (i === lang) ? isDel = false : void 0)
 
-        if (langArr.length === 3 && isDel) {
-            delete ldef[langArr[0]]
-            return ldef = Object.assign(ldef, {[lang]: langs[lang]})
+        if (!isDel) {
+            this.langBtns = langArr.indexOf(lang) + 1
+        } else {
+            if (langArr.length === 3) {
+                delete this.langsDef[langArr[0]]
+                Object.assign(this.langsDef, {[lang]: langs[lang]})
+                this.langBtns = 3
+            }
         }
+
+        this.$emit('updateLang', this.currLang)
+    }
+
+    private chooseLang(currLang: string, btnLang: string) {
+        this.currLang = btnLang
+        this.$emit('updateLang', this.currLang)
+    }
+
+    private enableBtn(btnLang: string, currLang: string) {
+        return btnLang === currLang ? true : false
     }
 }
 </script>
@@ -70,6 +91,9 @@ export default class GTBar extends Vue {
     button {
         text-transform: capitalize;
     }
+    // button[disabled] {
+    //     cursor: not-allowed;
+    // }
     .bottom-sheet.dialog {
         overflow-y: auto;
         background: #f4f4f4;
