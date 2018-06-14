@@ -1,4 +1,4 @@
-// https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
+// https://github.com/vuejs/vue-cli/
 const path = require('path')
 
 const resolve = dir => path.resolve(__dirname, dir)
@@ -9,6 +9,19 @@ const publicPath = process.env.NODE_ENV === 'development'
 module.exports = {
     baseUrl: resolve('src/renderer'),
     outputDir: 'dist',
+    css: {
+        // https://github.com/vuejs/vue-cli/blob/dev/docs/guide/css.md#passing-options-to-pre-processor-loaders
+        loaderOptions: {
+            sass: {
+                data: `@import "src/renderer/scss/main.scss";`
+                // loader: 'sass-resources-loader',
+                // options: {
+                //     // Provide path to the file with resources
+                //     resources: 'src/renderer/scss/main.scss',
+                // },
+            }
+        }
+    },
     devServer: {
         // open: process.platform === 'darwin',
         open: false,

@@ -1,7 +1,7 @@
 <template lang="pug">
 .gt-translate
-    gt-bar(
-        ref='gtBarFrom',
+    gt-lang-btns(
+        ref='gtBtnFrom',
         @updateLang=`getData()`,
     )
     .gt-origin
@@ -13,22 +13,19 @@
             v-btn(@click=`getAudio()`)
                 v-icon volume_up
             audio(ref='audioRef', :src=`audioURI`)
-    gt-bar(
-        ref='gtBarTo',
+    gt-lang-btns(
+        ref='gtBtnTo',
         @updateLang=`getData()`,
     )
-    .gt-target
-        h2 Examples:
-        p(v-for=`item in translateText.examples`, v-html=`item`)
-        hr
-        p {{translateText}}
+    gt-result(:result=`translateText`)
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 
 import GtInput from './GTInput.vue'
-import GtBar from './GTBar.vue'
+import GtLangBtns from './GTLangBtns.vue'
+import GtResult from './GTResult.vue'
 
 import API from './../../api'
 import Debounce from './../../utils/debounce'
@@ -43,25 +40,24 @@ const gtHeader = {
 
 @Component({
     components: {
-        GtBar,
+        GtLangBtns,
         GtInput,
+        GtResult,
     },
 })
 
 export default class GTranslate extends Vue {
-    private translateText = ''
+    private translateText: object = {}
     private audioURI = ''
 
     @Debounce(1500)
     private getData(this: any) {
         const txt = this.$refs.gtInput.text
-        const fromLang = this.$refs.gtBarFrom.currLang
-        const toLang = this.$refs.gtBarTo.currLang
+        const fromLang = this.$refs.gtBtnFrom.currLang
+        const toLang = this.$refs.gtBtnTo.currLang
 
-        if (txt === '') {
-            this.translateText = ''
-            return false
-        }
+        console.log(fromLang, toLang)
+        // if (txt === '') return false
 
         this.$http.get(translate(txt, {
                 url: API.gTranslateText,

@@ -27,11 +27,12 @@
                         v-icon(@click=`mini = !mini`) {{item.icon}}
                     v-list-tile-content
                         v-list-tile-title {{item.title}}
-    //- notice(msg='Hi, Len!!!')
+    // notice(msg='Hi, Len!!!')
     //- tree
     //- toolbar
     .lx-container(:class=`!mini ? 'open' : ''`)
         g-translate
+    back-top
 </template>
 
 <script lang='ts'>
@@ -39,6 +40,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import Notice from '@c/common/Notice.vue'
 import Tree from '@c/common/Tree.vue'
 import Toolbar from '@c/common/Toolbar.vue'
+import BackTop from '@c/common/BackTop.vue'
 import gTranslate from '@c/translate/GTranslate.vue'
 
 /* tslint:disable:no-console */
@@ -50,6 +52,7 @@ console.log('Home')
         Tree,
         Toolbar,
         gTranslate,
+        BackTop,
     },
 })
 

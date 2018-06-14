@@ -46,6 +46,7 @@ export default function formatGTData(data: any): IRawResult {
             exp.push(i.text)
         })
         Object.assign(obj, {examples: exp})
+        // Object.assign(obj, {examples: _.uniqBy(exp, '')})
     }
 
     return obj
