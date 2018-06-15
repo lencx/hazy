@@ -1,3 +1,4 @@
+$blue: #2196f3;
 $blue1: #09c;
 $blue2: #39c;
 $blue3: #0cf;
@@ -5,3 +6,10 @@ $blue3: #0cf;
 $red1: #c30;
 $red2: #c36;
 $red2: #f66;
+
+
+// drawer layout
+$drawerOpen: 300px;
+$drawerFold: 80px;
+$drawerOpenLeft: calc(100% - 300px);
+$drawerFoldLeft: calc(100% - 80px);

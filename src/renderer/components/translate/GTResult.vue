@@ -9,6 +9,7 @@
             b.num {{i+1}}
             p(v-html=`item`)
     hr
+    p {{result}}
 </template>
 
 <script lang="ts">

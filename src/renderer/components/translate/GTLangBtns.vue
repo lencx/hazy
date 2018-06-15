@@ -28,8 +28,6 @@ import Debounce from '../../utils/debounce';
 
 @Component
 export default class GTLangBtns extends Vue {
-    // private langBtns: number = 3
-
     // current language
     private currLang = 'auto'
     // language list status
@@ -42,7 +40,6 @@ export default class GTLangBtns extends Vue {
     private langsDef = langsDef
 
     private selectedLang(lang: string) {
-        console.log(this)
         this.$emit('updateLang', this.currLang)
     }
 
@@ -50,10 +47,6 @@ export default class GTLangBtns extends Vue {
         this.currLang = btnLang
         this.$emit('updateLang', this.currLang)
     }
-
-    // private enableBtn(btnLang: string, currLang: string) {
-    //     return btnLang === currLang ? true : false
-    // }
 }
 </script>
 

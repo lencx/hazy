@@ -14,8 +14,18 @@ Vue.prototype.$http = axios
 // https://github.com/imcvampire/vue-axios/issues/25
 Vue.use(VueAxios, axios)
 
-// tslint:disable-next-line:no-console
+// tslint:disable:no-console
 // console.log(process.env.NODE_ENV === 'development')
+
+// this.getComponentByRef("refId").updateNode(this.node)
+// Vue.prototype.getComponentByRef = (vm: Vue, refId: string) => {
+//     const $refs = vm.$parent ? vm.$parent.$refs : {}
+//     // tslint:disable-next-line:prefer-const
+//     for (let $id in $refs) {
+//         if ($id === refId) return $refs[$id]
+//     }
+//     return null
+// }
 
 new Vue({
     router,

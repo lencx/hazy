@@ -14,13 +14,13 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 
-
 @Component
 export default class GTInput extends Vue {
     private text = ''
 
     @Watch('text')
     private getText() {
+        this.$store.state.progressShow = true
         this.$emit('updateTxt', this.text)
     }
 }

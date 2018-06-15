@@ -1,31 +1,31 @@
 <template lang="pug">
 .gt-translate
-    gt-lang-btns(
+    GTLangBtns(
         ref='gtBtnFrom',
         @updateLang=`getData()`,
     )
     .gt-origin
-        gt-input(
+        GTInput(
             ref='gtInput',
             @updateTxt=`getData()`,
         )
         .voice
-            v-btn(@click=`getAudio()`)
+            v-btn(@click=`getAudio`)
                 v-icon volume_up
             audio(ref='audioRef', :src=`audioURI`)
-    gt-lang-btns(
+    GTLangBtns(
         ref='gtBtnTo',
         @updateLang=`getData()`,
     )
-    gt-result(:result=`translateText`)
+    GTResult(:result=`translateText`)
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 
-import GtInput from './GTInput.vue'
-import GtLangBtns from './GTLangBtns.vue'
-import GtResult from './GTResult.vue'
+import GTInput from './GTInput.vue'
+import GTLangBtns from './GTLangBtns.vue'
+import GTResult from './GTResult.vue'
 
 import API from './../../api'
 import Debounce from './../../utils/debounce'
@@ -40,14 +40,14 @@ const gtHeader = {
 
 @Component({
     components: {
-        GtLangBtns,
-        GtInput,
-        GtResult,
+        GTLangBtns,
+        GTInput,
+        GTResult,
     },
 })
 
 export default class GTranslate extends Vue {
-    private translateText: object = {}
+    private translateText = {}
     private audioURI = ''
 
     @Debounce(1500)
@@ -56,24 +56,22 @@ export default class GTranslate extends Vue {
         const fromLang = this.$refs.gtBtnFrom.currLang
         const toLang = this.$refs.gtBtnTo.currLang
 
-        console.log(fromLang, toLang)
-        // if (txt === '') return false
-
+        // console.log(fromLang, toLang)
         this.$http.get(translate(txt, {
                 url: API.gTranslateText,
                 from: fromLang,
                 to: toLang,
-                // to: 'en',
-                // from: 'zh-tw',
             }), gtHeader)
             .then((data: any) => this.translateText = formatGTData(data.data))
 
-        // this.audioURI = '/hello.mp3'
+        // this.audioURI = '/hello.mp3' // test
         this.audioURI = API.gTranslateAudio + getGTAudio(txt)
+        this.$store.state.progressShow = false
     }
 
     private getAudio(this: any) {
-        this.$refs.audioRef.play()
+        if (this.audioURI === '') return false
+        else this.$refs.audioRef.play()
     }
 }
 </script>

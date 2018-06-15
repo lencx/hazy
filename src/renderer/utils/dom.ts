@@ -24,5 +24,11 @@ export const off = (() => {
                 element.removeEventListener(event, handler, false)
             }
         }
+    } else {
+        return (element: Element|Window|any, event: string, handler: () => void) => {
+            if (element && event) {
+                element.detachEvent(`on${event}`, handler)
+            }
+        }
     }
 })()
