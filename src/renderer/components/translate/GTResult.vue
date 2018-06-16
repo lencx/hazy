@@ -8,7 +8,7 @@
         )
             b.num {{i+1}}
             p(v-html=`item`)
-    hr
+    // hr
     p {{result}}
 </template>
 
@@ -56,7 +56,8 @@ export default class Notice extends Vue {
                 justify-content: center;
                 font-size: 14px;
                 box-shadow: 2px 2px 8px rgba(#000, .7);
-                border-radius: 8px;
+                // border-radius: 8px;
+                @include roundLeft(8px);
                 user-select: none;
                 // color: #fff;
                 // text-shadow: 1px 2px 4px rgba(#000, .7);

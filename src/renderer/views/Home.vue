@@ -3,7 +3,8 @@
     DrawerLayout(:menus=`menus`)
         template(slot='drawerMenu')
         template(slot='drawerContainer')
-            gTranslate
+            // gTranslate
+            router-view
 </template>
 
 <script lang='ts'>
@@ -21,13 +22,14 @@ console.log('Home')
     },
 })
 
+
 export default class Home extends Vue {
     private drawer = true
     private mini = true
 
     private menus = [
-        {title: 'Dashboard', icon: 'dashboard'},
-        {title: 'Google Translate', icon: 'g_translate', color: '#4885ed'},
+        {title: 'Dashboard', icon: 'dashboard', link: ''},
+        {title: 'Google Translate', icon: 'g_translate', color: '#4885ed', link: '/home/translate'},
     ]
 }
 

@@ -16,7 +16,7 @@ back-top(
 
 back-top
     .my-backtop 返回顶部
-<template>
+</template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'

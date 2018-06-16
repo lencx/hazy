@@ -11,7 +11,7 @@
                     v-list.pa-0
                         v-list-tile(avatar)
                             v-list-tile-avatar
-                                img.logo(src='logo.png')
+                                img.logo(src='/logo.png')
                             v-list-tile-content
                                 v-list-tile-title
                                     h2 Hazy
@@ -25,12 +25,13 @@
                         :key=`item.title`,
                     )
                         v-list-tile-action
-                            v-icon(
+                            v-icon.ico-font(
                                 :style=`{color: item.color}`,
                                 @click=`mini = !mini`,
                             ) {{item.icon}}
                         v-list-tile-content
-                            v-list-tile-title {{item.title}}
+                            v-list-tile-title
+                                router-link(:to=`item.link`) {{item.title}}
     .lx-container(:class=`!mini ? 'open' : ''`)
         v-progress-linear.v-progress-line(
             indeterminate=true,
@@ -86,6 +87,9 @@ export default class Home extends Vue {
         .logo {
             border: solid 1px #aaa;
         }
+        .ico-font {
+            font-size: 28px !important;
+        }
     }
     .lx-container {
         width: $drawerFoldLeft;
@@ -102,9 +106,14 @@ export default class Home extends Vue {
             padding: 20px;
         }
     }
-    
     .menu-item {
         cursor: pointer;
+        .list__tile__title {
+            font-size: 18px !important;
+        }
+        &:hover {
+            color: $blue;
+        }
     }
 }
 </style>

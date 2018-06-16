@@ -2,12 +2,12 @@
 .gt-translate
     GTLangBtns(
         ref='gtBtnFrom',
-        @updateLang=`getData()`,
+        @updateLang=`getData`,
     )
     .gt-origin
         GTInput(
             ref='gtInput',
-            @updateTxt=`getData()`,
+            @updateTxt=`getData`,
         )
         .voice
             v-btn(@click=`getAudio`)
@@ -15,7 +15,7 @@
             audio(ref='audioRef', :src=`audioURI`)
     GTLangBtns(
         ref='gtBtnTo',
-        @updateLang=`getData()`,
+        @updateLang=`getData`,
     )
     GTResult(:result=`translateText`)
 </template>
