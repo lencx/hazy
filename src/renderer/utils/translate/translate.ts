@@ -1,4 +1,4 @@
-import { ITranslateOpts } from './types'
+import { ITranslateOpts } from 'gtranslate'
 
 import querystring from 'querystring'
 import tk from './tk'

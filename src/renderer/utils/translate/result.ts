@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 // tslint:disable:prefer-const
 import _ from 'lodash'
-import { IRawResult } from './types'
+import { IRawResult } from 'gtranslate'
 
 export default function formatGTData(data: any): IRawResult {
     const { src, sentences, dict, examples } = data

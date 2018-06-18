@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import home from '../route/home'
+import { homeRoute } from '../route/home'
 
 const routes = [{
     path: '*',
     redirect: '/home/dashboard',
 }]
 
-routes.push(home)
+routes.push(homeRoute)
 
 Vue.use(Router)
 

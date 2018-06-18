@@ -1,6 +1,4 @@
-export interface ILangs {
-    [key: string]: any;
-}
+import { IStrObj } from 'common'
 
 // tslint:disable:jsdoc-format
 /**
@@ -19,15 +17,8 @@ Array.from(document.querySelectorAll('#gt-sl-gms-menu .goog-menuitem-content'))
 意大利语,意第绪语,印地语,印尼巽他语,印尼语,印尼爪哇语,英语,约鲁巴语,越南语,中文
 */
 
-// language - default
-const langsDef: ILangs = {
-    'en': 'English',
-    'zh-cn': 'Chinese(Simplified)',
-    'eo': 'Esperanto',
-}
-
 // language - chinese
-const langsCN: ILangs = {
+const langsCN: IStrObj = {
     'auto': '自动',
     'af': '布尔语(南非荷兰语)',
     'sq': '	阿尔巴尼亚语',
@@ -137,7 +128,7 @@ const langsCN: ILangs = {
 
 // language - english
 // https://cloud.google.com/translate/docs/languages
-const langs: ILangs = {
+const langs: IStrObj = {
     'auto': 'Automatic',
     'af': 'Afrikaans',
     'sq': 'Albanian',
@@ -271,7 +262,6 @@ const isSupported = (desiredLang: string) => Boolean(getCode(desiredLang))
 export {
     langs,
     langsCN,
-    langsDef,
     getCode,
     isSupported,
 }

@@ -2,9 +2,9 @@ import Home from './../views/Home.vue'
 import GTranslate from './../components/translate/GTranslate.vue'
 import Dashboard from './../components/dashboard/Dashboard.vue'
 
-export default {
+export const homeRoute = {
     path: '/',
-    name: 'main',
+    name: 'home',
     component: Home,
     redirect: '/home/dashboard',
     children: [

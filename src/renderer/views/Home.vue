@@ -9,11 +9,9 @@
             v-toolbar.transparent(flat)
                 v-list.pa-0
                     v-list-tile(avatar)
-                        v-list-tile-avatar
-                            img.logo(
-                                src='/logo.png',
-                                :class=`isOpen`,
-                            )
+                        v-list-tile-avatar.logo-ico(:class=`isOpen`)
+                            .logobg
+                            img.logo(src='/logo.png')
                         v-list-tile-content
                             v-list-tile-title
                                 h2 Hazy
@@ -37,6 +35,7 @@
                             router-link(:to=`item.link`) {{item.title}}
     .lx-container(:class=`isOpen`)
         v-progress-linear.v-progress-line(
+            v-if=`progressState`,
             indeterminate=true,
             color='light-blue lighten-1',
             :active=`progressState`,
@@ -92,6 +91,21 @@ export default class Home extends Vue {
 </script>
 
 <style lang='scss'>
+@function stop-list($hover: false, $precision: 12) {
+    $list: ();
+    $unit: 360/$precision;
+    @for $i from 0 through $precision {
+        @if ($hover == true) {
+            $list: $list,
+                hsl($i*$unit, 70%, 60%);
+        }
+        @else {
+            $list: $list,
+                hsl($i*$unit, 80%, 75%);
+        }
+    }
+    @return $list;
+}
 .drawer-layout {
     color: #333;
     font-size: 20px;
@@ -107,11 +121,31 @@ export default class Home extends Vue {
         z-index: 9;
         box-shadow: 1px 2px 8px rgba(#000, .6);
         background-color: #f4f4f4;
-        .logo {
-            border: solid 1px #aaa;
-            cursor: pointer;
+        .logo-ico {
+            position: relative;
+            .logobg {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 40px;
+                height: 40px;
+                background: conic-gradient(stop-list(false));
+                animation: rotateAni 4s infinite linear;
+                box-shadow: 0 0 4px #000;
+                border-radius: 50%;
+            }
+            img {
+                position: absolute;
+                &.logo {
+                    padding: 1px;
+                    cursor: pointer;
+                }
+            }
             &:hover, &.open {
-                animation: rotateAni 3s infinite linear;
+                .logobg {
+                    background: conic-gradient(stop-list(true));
+                    animation: rotateAni 1s infinite linear;
+                }
             }
         }
         .ico-font {
@@ -127,6 +161,7 @@ export default class Home extends Vue {
             margin-left: $drawerOpen;
         }
         .v-progress-line {
+            position: fixed;
             margin: 0;
         }
         .lx-container-content {

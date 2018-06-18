@@ -21,7 +21,7 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator'
-import { langs, langsCN, langsDef } from './../../utils/translate/lang'
+import { langs, langsCN } from './../../utils/translate/lang'
 import Debounce from '../../utils/debounce';
 
 // tslint:disable:no-console
@@ -36,8 +36,6 @@ export default class GTLangBtns extends Vue {
     private langs = langs
     // language - Chinese
     private langsCN = langsCN
-    // default language
-    private langsDef = langsDef
 
     private selectedLang(lang: string) {
         this.$emit('updateLang', this.currLang)

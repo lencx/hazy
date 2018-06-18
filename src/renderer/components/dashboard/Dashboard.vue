@@ -1,12 +1,21 @@
 <template lang="pug">
 .lx-dashboard
-    h2 Dashboard
+    StateBar
+    CardItem
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import StateBar from './StateBar.vue'
+import CardItem from './CardItem.vue'
 
-@Component
+@Component({
+    components: {
+        StateBar,
+        CardItem,
+    },
+})
+
 export default class Dashboard extends Vue {
 }
 </script>
