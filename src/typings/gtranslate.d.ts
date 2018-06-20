@@ -19,6 +19,12 @@ declare module 'gtranslate' {
         pos: string;
         entry: IDefinitionsEntry;
     }
+
+    export interface ISynsets {
+        pos: string;
+        // synonym
+        entry: string[];
+    }
     
     export interface IRawResult {
         src: string;
@@ -38,9 +44,11 @@ declare module 'gtranslate' {
     
         examples?: string[];
     
-        definitions?: Array<{
-    
-        }>
+        definitions?: IDefinitions[];
+
+        related_words?: string[];
+
+        synsets?: ISynsets[];
     }
 }
 

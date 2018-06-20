@@ -1,4 +1,4 @@
-import { IStrObj } from 'common'
+import { IObjStr } from 'common'
 
 // tslint:disable:jsdoc-format
 /**
@@ -18,7 +18,7 @@ Array.from(document.querySelectorAll('#gt-sl-gms-menu .goog-menuitem-content'))
 */
 
 // language - chinese
-const langsCN: IStrObj = {
+const langsCN: IObjStr = {
     'auto': '自动',
     'af': '布尔语(南非荷兰语)',
     'sq': '	阿尔巴尼亚语',
@@ -128,7 +128,7 @@ const langsCN: IStrObj = {
 
 // language - english
 // https://cloud.google.com/translate/docs/languages
-const langs: IStrObj = {
+const langs: IObjStr = {
     'auto': 'Automatic',
     'af': 'Afrikaans',
     'sq': 'Albanian',

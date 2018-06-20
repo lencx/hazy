@@ -120,7 +120,7 @@ export default class Home extends Vue {
         height: 100vh;
         z-index: 9;
         box-shadow: 1px 2px 8px rgba(#000, .6);
-        background-color: #f4f4f4;
+        background-color: $grey4;
         .logo-ico {
             position: relative;
             .logobg {

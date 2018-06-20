@@ -9,15 +9,19 @@
         v-model.lazy=`text`,
         counter=5000,
     )
+    slot
 </template>
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 
+// tslint:disable:no-console
+
 @Component
 export default class GTInput extends Vue {
     private text = ''
 
+    // watch: text content
     @Watch('text')
     private getText() {
         this.$store.state.progressShow = true

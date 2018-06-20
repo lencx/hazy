@@ -8,9 +8,11 @@
         v-btn(
             :class=`innerClasses`,
             :loading=`loading`,
-            icon, outline,
+            fab,
         )
-            v-icon navigation
+            v-icon(
+                large, style='display: flex'
+            ) navigation
 
 </template>
 
@@ -87,7 +89,7 @@ export default class BackTop extends Vue {
         transform: scale(1);
     }
     .lx-back-top-inner {
-        color: #333;
+        color: $baseColor;
     }
 }
 </style>

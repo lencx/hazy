@@ -1,7 +1,14 @@
 <template lang='pug'>
-.gt-result(v-if=`result.examples`)
+.gt-result(v-if=`isShow`)
     h2 Examples:
-    ul
+    // ul.list-bg-color.list-shadow.list-skew
+    p {{result.src}}
+    p {{result.sentences}}
+    p {{result.dict}}
+    p {{result.definitions}}
+    p {{result.synsets}}
+    p {{result.related_words}}
+    ul.list-line.list-skew
         li(
             v-for=`(item, i) in result.examples`,
             :key=`i`,
@@ -17,7 +24,16 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Notice extends Vue {
+    // translation results
     @Prop() private result!: object
+    // the result is not empty, the value is `true`
+    private hasResult = false
+
+    // whether to show results
+    get isShow() {
+        return this.hasResult = Object.keys(this.result).length === 0
+            ? false : true
+    }
 }
 </script>
 
@@ -30,21 +46,8 @@ export default class Notice extends Vue {
             position: relative;
             padding: 5px 20px 5px 50px;
             // @include roundRight(8px);
-            border-radius: 8px;
-            box-shadow: 1px -2px 4px rgba(#000, .3),
-                2px 3px 5px rgba(#000, .4);
-            &:nth-child(3n) {
-                // background: #efc;
-                background: rgb(238, 252, 212);
-            }
-            &:nth-child(3n+1) {
-                // background: #fcc;
-                background: rgb(248, 225, 228);
-            }
-            &:nth-child(3n+2) {
-                // background: #dcf;
-                background: rgb(213, 235, 248);
-            }
+            // border-radius: 8px;
+            @include roundLeft(8px);
             .num {
                 position: absolute;
                 display: flex;
@@ -55,7 +58,6 @@ export default class Notice extends Vue {
                 align-items: center;
                 justify-content: center;
                 font-size: 14px;
-                box-shadow: 2px 2px 8px rgba(#000, .7);
                 // border-radius: 8px;
                 @include roundLeft(8px);
                 user-select: none;
@@ -64,6 +66,56 @@ export default class Notice extends Vue {
             }
             p {
                 margin: 0;
+            }
+        }
+        &.list-skew {
+            li {
+                &:nth-child(2n) {
+                    transform: skew(-8deg);
+                    p {
+                        transform: skew(10deg);
+                    }
+                }
+                &:nth-child(2n+1) {
+                    transform: skew(8deg);
+                    p {
+                        transform: skew(-10deg);
+                    }
+                }
+            }
+        }
+        &.list-shadow {
+            li {
+                box-shadow: 1px -2px 4px rgba(#000, .3),
+                    2px 3px 5px rgba(#000, .4);
+                .num {
+                    box-shadow: 2px 2px 8px rgba(#000, .7);
+                }
+            }
+        }
+        &.list-line {
+            li {
+                border: solid 1px #eee;
+                .num {
+                    border-right: solid 1px #ddd;
+                }
+                margin-bottom: 2px;
+            }
+        }
+        &.list-bg-color {
+            li {
+                &:nth-child(3n) {
+                    // background: #efc;
+                    background: rgb(238, 252, 212);
+                }
+                &:nth-child(3n+1) {
+                    // background: #fcc;
+                    background: rgb(248, 225, 228);
+                }
+                &:nth-child(3n+2) {
+                    // background: #dcf;
+                    background: rgb(213, 235, 248);
+                }
             }
         }
     }

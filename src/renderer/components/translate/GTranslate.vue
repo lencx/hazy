@@ -1,22 +1,32 @@
 <template lang="pug">
 .gt-translate
-    GTLangBtns(
-        ref='gtBtnFrom',
-        @updateLang=`getData`,
-    )
-    .gt-origin
-        GTInput(
-            ref='gtInput',
-            @updateTxt=`getData`,
+    .origin-container
+        GTLangBtns(
+            ref='gtBtnFrom',
+            @updateLang=`getData`,
+            :swap=`fromLang`,
         )
-        .voice
-            v-btn(@click=`getAudio`)
-                v-icon volume_up
-            audio(ref='audioRef', :src=`audioURI`)
-    GTLangBtns(
-        ref='gtBtnTo',
-        @updateLang=`getData`,
-    )
+        v-btn.gt-swap(
+            icon,
+            @click=`swapLang`
+        )
+            v-icon(large) swap_calls
+        GTLangBtns(
+            ref='gtBtnTo',
+            @updateLang=`getData`,
+            :swap=`toLang`,
+        )
+        .gt-origin
+            GTInput.gt-input(
+                ref='gtInput',
+                @updateTxt=`getData`,
+            )
+                .voice
+                    v-btn(@click=`getAudio`,
+                        small, round,
+                    )
+                        v-icon volume_up
+                    audio(ref='audioRef', :src=`audioURI`)
     GTResult(:result=`translateText`)
 </template>
 
@@ -47,28 +57,57 @@ const gtHeader = {
 })
 
 export default class GTranslate extends Vue {
+    // translation results
     private translateText = {}
+    // origin language pronunciation
     private audioURI = ''
+    // origin language
+    private fromLang = 'auto'
+    // target language
+    private toLang = 'auto'
 
+    // get translation results
     @Debounce(1500)
     private getData(this: any) {
         const txt = this.$refs.gtInput.text
-        const fromLang = this.$refs.gtBtnFrom.currLang
-        const toLang = this.$refs.gtBtnTo.currLang
+        this.fromLang = this.$refs.gtBtnFrom.currLang
+        this.toLang = this.$refs.gtBtnTo.currLang
+
+        if (txt === '') {
+            this.progressShow(false)
+            this.translateText = {}
+            return false
+        }
 
         // console.log(fromLang, toLang)
         this.$http.get(translate(txt, {
                 url: API.gTranslateText,
-                from: fromLang,
-                to: toLang,
+                from: this.fromLang,
+                to: this.toLang,
             }), gtHeader)
             .then((data: any) => this.translateText = formatGTData(data.data))
 
         // this.audioURI = '/hello.mp3' // test
         this.audioURI = API.gTranslateAudio + getGTAudio(txt)
-        this.$store.state.progressShow = false
+        this.progressShow(false)
     }
 
+    // query progress
+    private progressShow(isShow: boolean) {
+        this.$store.state.progressShow = isShow
+    }
+
+    // swap language
+    private swapLang(this: any) {
+        const tmpLang = this.fromLang
+        this.fromLang = this.toLang
+        this.toLang = tmpLang
+        console.log(this.fromLang, this.toLang)
+        console.log(this.$refs.gtBtnFrom.currLang)
+        this.getData()
+    }
+
+    // get pronunciation
     private getAudio(this: any) {
         if (this.audioURI === '') return false
         else this.$refs.audioRef.play()
@@ -76,10 +115,30 @@ export default class GTranslate extends Vue {
 }
 </script>
 
-
 <style lang='scss'>
-// .gt-origin, .gt-target {
-//     width: 40%;
-//     float: left;
-// }
+.origin-container {
+    // border: double 2px green;
+    border-color: $grey3;
+    border-width: 2px;
+    border-style: dashed;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.gt-swap {
+    color: $grey2;
+    .icon {
+        transform: rotateZ(90deg)
+    }
+}
+.gt-input {
+    position: relative;
+    .voice {
+        position: absolute;
+        bottom: -4px;
+        button {
+            margin: 0;
+        }
+    }
+}
 </style>

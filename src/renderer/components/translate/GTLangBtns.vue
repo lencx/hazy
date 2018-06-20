@@ -1,26 +1,25 @@
 <template lang='pug'>
 .gt-btn
-    v-layout(row, wrap, align-center)
-        v-bottom-sheet(v-model='isOpen', data-app)
-            v-btn.gt-lang-btn(
-                round,
-                color='cyan',
-                slot='activator',
-                :class=`isOpen ? 'arrow-active' : ''`
-                @click=`isOpen = !isOpen`,
-            )
-                b {{langsCN[currLang]}}
-                v-icon.ico(large, round) chevron_right
-            v-subheader Language
-            v-list-tile(
-                v-for=`(lang, i) in langs`,
-                :key=`i`,
-                @click=`isOpen = false; currLang = i; selectedLang(currLang);`,
-            ) {{langs[i]}}
+    v-bottom-sheet(v-model='isOpen', data-app)
+        v-btn.gt-lang-btn(
+            round,
+            color='cyan',
+            slot='activator',
+            :class=`isOpen ? 'arrow-active' : ''`
+            @click=`isOpen = !isOpen`,
+        )
+            b {{langsCN[currLang]}}
+            v-icon.ico(large, round) chevron_right
+        v-subheader Language
+        v-list-tile(
+            v-for=`(lang, i) in langs`,
+            :key=`i`,
+            @click=`isOpen = false; currLang = i; selectedLang(currLang);`,
+        ) {{langs[i]}}
 </template>
 
 <script lang='ts'>
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { langs, langsCN } from './../../utils/translate/lang'
 import Debounce from '../../utils/debounce';
 
@@ -28,6 +27,9 @@ import Debounce from '../../utils/debounce';
 
 @Component
 export default class GTLangBtns extends Vue {
+    // swap language
+    @Prop() private swap!: string
+
     // current language
     private currLang = 'auto'
     // language list status
@@ -37,22 +39,25 @@ export default class GTLangBtns extends Vue {
     // language - Chinese
     private langsCN = langsCN
 
+    // choose a language
     private selectedLang(lang: string) {
         this.$emit('updateLang', this.currLang)
     }
 
-    private chooseLang(currLang: string, btnLang: string) {
-        this.currLang = btnLang
-        this.$emit('updateLang', this.currLang)
+    // watch: switch language
+    @Watch('swap')
+    private swapLang() {
+        this.currLang = this.swap
     }
 }
 </script>
 
 <style lang='scss'>
 .gt-btn {
-    width: 100%;
-    margin: 10px;
+    display: inline-block;
+    // margin: 10px 0 0;
     button {
+        margin: 0;
         text-transform: capitalize;
     }
     // button[disabled] {
@@ -60,7 +65,7 @@ export default class GTLangBtns extends Vue {
     // }
     .bottom-sheet.dialog {
         overflow-y: auto;
-        background: #f4f4f4;
+        background: $grey4;
         .list__tile {
             &:hover {
                 background: $blue1;
@@ -70,7 +75,7 @@ export default class GTLangBtns extends Vue {
         }
     }
     .arrow-active {
-        background-color: #929292 !important;
+        background-color: $grey2 !important;
         .ico {
             transform: rotateZ(90deg);
         }
