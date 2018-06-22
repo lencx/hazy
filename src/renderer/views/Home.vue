@@ -21,8 +21,7 @@
             v-list.pa-0(dense)
                 v-divider
                 v-list-tile.menu-item(
-                    v-for=`item in menus`,
-                    :key=`item.title`,
+                    v-for=`item in menus`, :key=`item.title`,
                 )
                     v-list-tile-action
                         // :style=`{color: item.color}`,
@@ -62,7 +61,7 @@ console.log('Home')
 export default class Home extends Vue {
     private drawer = true
     private mini = true
-    private progressShow = false
+    private progressShow = this.progressState
 
     private menus = [
         {
@@ -80,10 +79,10 @@ export default class Home extends Vue {
         },
     ]
 
+    // computed
     get progressState() {
         return this.$store.state.progressShow
     }
-
     get isOpen() {
         return {[`open`]: !this.mini}
     }

@@ -18,3 +18,8 @@
     @include roundDeg('bottom-left', $size);
     @include roundDeg('bottom-right', $size);
 }
+
+@mixin sq($width) {
+    width: $width;
+    height: $width;
+}

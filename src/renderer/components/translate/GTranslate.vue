@@ -4,7 +4,7 @@
         GTLangBtns(
             ref='gtBtnFrom',
             @updateLang=`getData`,
-            :swap=`fromLang`,
+            :swap=`[fromLang, 'from']`,
         )
         v-btn.gt-swap(
             icon,
@@ -14,7 +14,7 @@
         GTLangBtns(
             ref='gtBtnTo',
             @updateLang=`getData`,
-            :swap=`toLang`,
+            :swap=`[toLang, 'to']`,
         )
         .gt-origin
             GTInput.gt-input(
@@ -22,8 +22,9 @@
                 @updateTxt=`getData`,
             )
                 .voice
-                    v-btn(@click=`getAudio`,
+                    v-btn(
                         small, round,
+                        @click=`getAudio`,
                     )
                         v-icon volume_up
                     audio(ref='audioRef', :src=`audioURI`)
@@ -40,6 +41,7 @@ import GTResult from './GTResult.vue'
 import API from './../../api'
 import Debounce from './../../utils/debounce'
 import { translate, getGTAudio, formatGTData } from './../../utils/translate'
+import { gTranslate } from './../../config'
 
 // tslint:disable:no-console
 const gtHeader = {
@@ -62,9 +64,9 @@ export default class GTranslate extends Vue {
     // origin language pronunciation
     private audioURI = ''
     // origin language
-    private fromLang = 'auto'
+    private fromLang = localStorage.getItem(`${gTranslate.prefix}from`) || gTranslate.from
     // target language
-    private toLang = 'auto'
+    private toLang = localStorage.getItem(`${gTranslate.prefix}to`) || gTranslate.to
 
     // get translation results
     @Debounce(1500)
@@ -102,8 +104,8 @@ export default class GTranslate extends Vue {
         const tmpLang = this.fromLang
         this.fromLang = this.toLang
         this.toLang = tmpLang
-        console.log(this.fromLang, this.toLang)
-        console.log(this.$refs.gtBtnFrom.currLang)
+        localStorage.setItem(`${gTranslate.prefix}from`, this.fromLang)
+        localStorage.setItem(`${gTranslate.prefix}to`, this.toLang)
         this.getData()
     }
 

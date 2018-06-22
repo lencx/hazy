@@ -1,0 +1,88 @@
+<template lang="pug">
+.i18n-btn
+    v-menu(offset-y, data-app)
+        v-btn(
+            slot='activator', icon,
+            :color=`flag === '' ? 'blue' : 'white'`
+        )
+            v-icon(v-if=`flag === ''`) language
+            img.btn-flag-ico(v-else, :src=`flag`)
+        v-list
+            v-list-tile(
+                v-for=`(item, i) in i18nLangs`, :key=`i`,
+                @click=`chooseI18n(item.lang)`,
+            )
+                v-list-tile-title
+                    img.flag-ico(:src=`item.flag`)
+                    span {{item.title}}
+</template>
+
+
+<script lang="ts">
+import { Vue, Component, Watch } from 'vue-property-decorator'
+
+import { gTranslate } from './../../config'
+
+// tslint:disable:no-console
+
+@Component
+export default class I18N extends Vue {
+    private flag = this.flagIco()
+
+    private i18nLangs = [
+        {title: '中文-简体', lang: 'zh-cn', flag: require('../../assets/flag/zh-cn.png')},
+        {title: 'English', lang: 'en', flag: require('../../assets/flag/en.png')},
+    ]
+
+    private flagIco() {
+        const lang = localStorage.getItem(gTranslate.i18n)
+        return lang !== null
+            ? require('../../assets/flag/' + lang + '.png') : ''
+    }
+
+    // choose i18n language
+    private chooseI18n(lang: string) {
+        // const obj: any = this.i18nLangs.find(item => item.lang === lang)
+        this.flag = require('../../assets/flag/' + lang + '.png')
+        // console.log(this.flag)
+        this.$store.state.gt.i18nLang = lang
+        localStorage.setItem(`${gTranslate.i18n}`, lang)
+    }
+}
+</script>
+
+<style lang="scss">
+.i18n-btn {
+    position: absolute;
+    right: 36px;
+    top: 30px;
+    color: #fff;
+    .btn-flag-ico {
+        max-width: 36px;
+        border-radius: 50%;
+    }
+    .menu .menu__content {
+        top: 45px !important;
+        right: -10px !important;
+        left: unset !important;
+        .list {
+            background: $grey4;
+            color: $baseFontColor;
+            >div {
+                cursor: pointer;
+                &:hover {
+                    background: $grey3;
+                }
+                .flag-ico {
+                    max-width: 20px;
+                    margin-right: 10px;
+                }
+                span {
+                    vertical-align: 4px;
+                }
+            }
+        }
+    }
+}
+</style>
+

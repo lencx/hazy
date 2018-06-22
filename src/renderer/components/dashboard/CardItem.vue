@@ -4,8 +4,7 @@
         v-layout(row, wrap)
             v-flex(
                 xs12, md6,
-                v-for=`item in cards`,
-                :key=`item.title`,
+                v-for=`item in cards`, :key=`item.title`,
             )
                 v-card(hover=true)
                     v-card-media(:src=`item.img`)

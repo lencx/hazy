@@ -1,13 +1,9 @@
 <template lang="pug">
 .gt-area
     v-text-field.gt-box(
-        name='g-translate',
-        color='pink',
-        label='Please enter',
-        textarea,
-        loading=`false`,
+        name='g-translate', color='pink', label='Please enter',
+        textarea, loading=`false`, counter=5000,
         v-model.lazy=`text`,
-        counter=5000,
     )
     slot
 </template>

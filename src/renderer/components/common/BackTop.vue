@@ -10,9 +10,7 @@
             :loading=`loading`,
             fab,
         )
-            v-icon(
-                large, style='display: flex'
-            ) navigation
+            v-icon(large, style='display: flex') navigation
 
 </template>
 

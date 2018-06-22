@@ -1,18 +1,15 @@
 <template lang='pug'>
 .gt-result(v-if=`isShow`)
     h2 Examples:
+    // p {{result.src}}
+    // p {{result.sentences}}
+    // p {{result.dict}}
+    // p {{result.definitions}}
+    // p {{result.synsets}}
+    // p {{result.related_words}}
     // ul.list-bg-color.list-shadow.list-skew
-    p {{result.src}}
-    p {{result.sentences}}
-    p {{result.dict}}
-    p {{result.definitions}}
-    p {{result.synsets}}
-    p {{result.related_words}}
     ul.list-line.list-skew
-        li(
-            v-for=`(item, i) in result.examples`,
-            :key=`i`,
-        )
+        li(v-for=`(item, i) in result.examples`, :key=`i`)
             b.num {{i+1}}
             p(v-html=`item`)
     // hr

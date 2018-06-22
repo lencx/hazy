@@ -2,52 +2,56 @@
 .gt-btn
     v-bottom-sheet(v-model='isOpen', data-app)
         v-btn.gt-lang-btn(
-            round,
-            color='cyan',
-            slot='activator',
+            round, color='cyan', slot='activator',
             :class=`isOpen ? 'arrow-active' : ''`
             @click=`isOpen = !isOpen`,
         )
-            b {{langsCN[currLang]}}
+            b {{btnLang[currLang]}}
             v-icon.ico(large, round) chevron_right
         v-subheader Language
         v-list-tile(
-            v-for=`(lang, i) in langs`,
-            :key=`i`,
+            v-for=`(lang, i) in langs`, :key=`i`,
             @click=`isOpen = false; currLang = i; selectedLang(currLang);`,
-        ) {{langs[i]}}
+        ) {{btnLang[i]}}
 </template>
 
 <script lang='ts'>
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+
 import { langs, langsCN } from './../../utils/translate/lang'
-import Debounce from '../../utils/debounce';
+import Debounce from './../../utils/debounce'
+import { gTranslate } from './../../config'
+import { IObjStr } from 'common'
 
 // tslint:disable:no-console
 
 @Component
 export default class GTLangBtns extends Vue {
     // swap language
-    @Prop() private swap!: string
+    @Prop() private swap!: string[]
 
     // current language
-    private currLang = 'auto'
+    private currLang = this.swap[0]
     // language list status
     private isOpen = false
     // language - english
     private langs = langs
-    // language - Chinese
-    private langsCN = langsCN
+
+    get btnLang() {
+        return this.$store.state.gt.i18nLang === 'en'
+            ? langs : langsCN
+    }
 
     // choose a language
     private selectedLang(lang: string) {
+        localStorage.setItem(`${gTranslate.prefix}${this.swap[1]}`, lang)
         this.$emit('updateLang', this.currLang)
     }
 
     // watch: switch language
     @Watch('swap')
-    private swapLang() {
-        this.currLang = this.swap
+    private switchLang() {
+        this.currLang = this.swap[0]
     }
 }
 </script>
