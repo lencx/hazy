@@ -5,8 +5,10 @@ import VueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './core/router'
 import store from './core/store'
+import i18n from './core/i18n'
 import './core/ui'
 import './core/registerServiceWorker'
+import './core/os'
 
 Vue.config.productionTip = false
 
@@ -28,6 +30,7 @@ Vue.use(VueAxios, axios)
 // }
 
 new Vue({
+    i18n,
     router,
     store,
     render: h => h(App),

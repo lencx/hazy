@@ -50,6 +50,12 @@ declare module 'gtranslate' {
 
         synsets?: ISynsets[];
     }
+
+    export interface IGTranslate {
+        prefix: string;
+        from: string;
+        to: string;
+    }    
 }
 
 // export interface ITranslateResult {

@@ -1951,7 +1951,7 @@ check-more-types@2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/check-more-types/-/check-more-types-2.24.0.tgz#1420ffb10fd444dcfc79b43891bbfffd32a84600"
 
-chokidar@^1.7.0:
+chokidar@^1.5.1, chokidar@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   dependencies:
@@ -3064,6 +3064,12 @@ electron-publish@20.15.0:
     fs-extra-p "^4.6.0"
     lazy-val "^1.0.3"
     mime "^2.3.1"
+
+electron-reload@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/electron-reload/-/electron-reload-1.2.3.tgz#15f2d0ad9b41a149756cf2ee57d1cd95248df02c"
+  dependencies:
+    chokidar "^1.5.1"
 
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.47:
   version "1.3.48"
@@ -4696,7 +4702,7 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.11.0, js-yaml@^3.12.0:
+js-yaml@^3.11.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   dependencies:
@@ -8332,6 +8338,10 @@ vue-class-component@^6.0.0, vue-class-component@^6.1.0:
 vue-hot-reload-api@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
+
+vue-i18n@^7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-7.8.1.tgz#2ce4b6efde679a1e05ddb5d907bfc1bc218803b2"
 
 vue-loader@^15.1.0:
   version "15.2.0"

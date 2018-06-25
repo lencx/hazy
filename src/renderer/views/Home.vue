@@ -31,7 +31,7 @@
                         ) {{item.icon}}
                     v-list-tile-content(@click=`mini = !mini`)
                         v-list-tile-title
-                            router-link(:to=`item.link`) {{item.title}}
+                            router-link(:to=`item.link`) {{$t(item.title)}}
     .lx-container(:class=`isOpen`)
         v-progress-linear.v-progress-line(
             v-if=`progressState`,
@@ -65,19 +65,24 @@ export default class Home extends Vue {
 
     private menus = [
         {
-            title: 'Dashboard',
+            title: 'dashboard',
             icon: 'dashboard',
             color: 'teal lighten-2',
             link: '/home/dashboard',
         },
         {
-            title: 'Google Translate',
+            title: 'gtrans',
             icon: 'g_translate',
             // color: '#4885ed',
             color: 'blue lighten-1',
             link: '/home/translate',
         },
     ]
+
+    get aa() {
+        console.log(this.$t('messages'))
+        return this.$i18n.locale
+    }
 
     // computed
     get progressState() {

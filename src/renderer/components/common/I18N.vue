@@ -21,7 +21,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 
-import { gTranslate } from './../../config'
+import { gTranslate, lxI18nLang } from './../../config'
 
 // tslint:disable:no-console
 
@@ -35,7 +35,7 @@ export default class I18N extends Vue {
     ]
 
     private flagIco() {
-        const lang = localStorage.getItem(gTranslate.i18n)
+        const lang = localStorage.getItem(lxI18nLang)
         return lang !== null
             ? require('../../assets/flag/' + lang + '.png') : ''
     }
@@ -45,8 +45,9 @@ export default class I18N extends Vue {
         // const obj: any = this.i18nLangs.find(item => item.lang === lang)
         this.flag = require('../../assets/flag/' + lang + '.png')
         // console.log(this.flag)
-        this.$store.state.gt.i18nLang = lang
-        localStorage.setItem(`${gTranslate.i18n}`, lang)
+        this.$store.state.i18nLang = lang
+        this.$i18n.locale = lang
+        localStorage.setItem(`${lxI18nLang}`, lang)
     }
 }
 </script>

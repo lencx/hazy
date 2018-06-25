@@ -8,7 +8,7 @@
         )
             b {{btnLang[currLang]}}
             v-icon.ico(large, round) chevron_right
-        v-subheader Language
+        v-subheader {{$t('lang')}}
         v-list-tile(
             v-for=`(lang, i) in langs`, :key=`i`,
             @click=`isOpen = false; currLang = i; selectedLang(currLang);`,
@@ -38,7 +38,7 @@ export default class GTLangBtns extends Vue {
     private langs = langs
 
     get btnLang() {
-        return this.$store.state.gt.i18nLang === 'en'
+        return this.$store.state.i18nLang === 'en'
             ? langs : langsCN
     }
 
