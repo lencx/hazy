@@ -1,5 +1,6 @@
 // https://github.com/vuejs/vue-cli/
 const path = require('path')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const resolve = dir => path.resolve(__dirname, dir)
 
@@ -59,5 +60,27 @@ module.exports = {
                 '@u': resolve('src/renderer/utils')
             }
         }
+    },
+    // https://github.com/vuejs/vue-cli/issues/1027
+    chainWebpack: webpackConfig => {
+        let inlineLimit = 10000
+        webpackConfig.module
+            .rule('images')
+            .test(/\.(png|jpe?g|gif)(\?.*)?$/)
+            .use('url-loader')
+            .loader('url-loader')
+            .options({
+                limit: inlineLimit,
+                name: '[name].[hash:8].[ext]'
+            })
+        // webpackConfig.module
+        //     .rule('fonts')
+        //     .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/i)
+        //     .use('url-loader')
+        //     .loader('url-loader')
+        //     .options({
+        //         limit: inlineLimit,
+        //         name: path.join('.', 'fonts/[name].[hash:8].[ext]')
+        //     })
     }
 }

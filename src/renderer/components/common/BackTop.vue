@@ -16,8 +16,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { on, off } from './../../utils/dom'
-import scrollTop from './../../utils/scrollTop'
+import { on, off } from './../../utils/browser/dom'
+import scrollTop from './../../utils/browser/scrollTop'
 import Debounce from './../../utils/debounce'
 
 const prefixCls = 'lx-back-top'

@@ -20,8 +20,13 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
-
 import { gTranslate, lxI18nLang } from './../../config'
+import { IObjStr } from 'common'
+
+const flags: IObjStr = {
+    'zh-cn': require('../../assets/flag/zh-cn.png'),
+    'en': require('../../assets/flag/en.png'),
+}
 
 // tslint:disable:no-console
 
@@ -30,20 +35,20 @@ export default class I18N extends Vue {
     private flag = this.flagIco()
 
     private i18nLangs = [
-        {title: '中文-简体', lang: 'zh-cn', flag: require('../../assets/flag/zh-cn.png')},
-        {title: 'English', lang: 'en', flag: require('../../assets/flag/en.png')},
+        {title: '中文-简体', lang: 'zh-cn', flag: flags['zh-cn']},
+        {title: 'English', lang: 'en', flag: flags.en},
     ]
 
     private flagIco() {
         const lang = localStorage.getItem(lxI18nLang)
         return lang !== null
-            ? require('../../assets/flag/' + lang + '.png') : ''
+            ? flags[lang] : ''
     }
 
     // choose i18n language
     private chooseI18n(lang: string) {
         // const obj: any = this.i18nLangs.find(item => item.lang === lang)
-        this.flag = require('../../assets/flag/' + lang + '.png')
+        this.flag = flags[lang]
         // console.log(this.flag)
         this.$store.state.i18nLang = lang
         this.$i18n.locale = lang

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <script src='/lib/prefixfree.min.js'></script>
-    <script src='/lib/conic-gradient.js'></script>
+    <script src='<%= process.env.NODE_ENV==="development" ? "" : "." %>/lib/prefixfree.min.js'></script>
+    <script src='<%= process.env.NODE_ENV==="development" ? "" : "." %>/lib/conic-gradient.js'></script>
     <title>hazy</title>
   </head>
   <body>
@@ -15,8 +15,8 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <!-- <script>
-      document.write(process.env.OSINFO)
-    </script> -->
+    <script>
+      localStorage.setItem('OS_INFO', process.env.OSINFO)
+    </script>
   </body>
 </html>

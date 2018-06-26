@@ -1,8 +1,8 @@
 <template lang="pug">
 .gt-area
     v-text-field.gt-box(
-        name='g-translate', color='pink', label='Please enter',
-        textarea, loading=`false`, counter=5000,
+        name='g-translate', color='pink', :label=`$t(pleaseholder)`,
+        textarea, loading=`false`, counter=2000, autofocus=true,
         v-model.lazy=`text`,
     )
     slot
@@ -16,6 +16,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 @Component
 export default class GTInput extends Vue {
     private text = ''
+    private pleaseholder = 'gt.pleaseholder'
 
     // watch: text content
     @Watch('text')

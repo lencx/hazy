@@ -11,7 +11,7 @@
                     v-list-tile(avatar)
                         v-list-tile-avatar.logo-ico(:class=`isOpen`)
                             .logobg
-                            img.logo(src='/logo.png')
+                            img.logo(:src=`logoIco`)
                         v-list-tile-content
                             v-list-tile-title
                                 h2 Hazy
@@ -47,6 +47,7 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
 import BackTop from '@c/common/BackTop.vue'
+
 // import GTranslate from '@c/translate/GTranslate.vue'
 
 /* tslint:disable:no-console */
@@ -62,6 +63,7 @@ export default class Home extends Vue {
     private drawer = true
     private mini = true
     private progressShow = this.progressState
+    private logoIco = require('./../assets/logo.png')
 
     private menus = [
         {
@@ -78,11 +80,6 @@ export default class Home extends Vue {
             link: '/home/translate',
         },
     ]
-
-    get aa() {
-        console.log(this.$t('messages'))
-        return this.$i18n.locale
-    }
 
     // computed
     get progressState() {

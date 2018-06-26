@@ -8,7 +8,7 @@
         )
             b {{btnLang[currLang]}}
             v-icon.ico(large, round) chevron_right
-        v-subheader {{$t('lang')}}
+        v-subheader.title {{$t('lang')}}
         v-list-tile(
             v-for=`(lang, i) in langs`, :key=`i`,
             @click=`isOpen = false; currLang = i; selectedLang(currLang);`,
@@ -89,6 +89,9 @@ export default class GTLangBtns extends Vue {
         b {
             padding: 0 10px;
         }
+    }
+    .title {
+        justify-content: center;
     }
 }
 </style>
