@@ -9,6 +9,7 @@ export default new Vuex.Store({
         progressShow: false,
         // 'zh-cn' | 'en'
         i18nLang: localStorage.getItem(lxI18nLang) || 'en',
+        ips: {},
     },
     mutations: {},
     actions: {},

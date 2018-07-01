@@ -10,7 +10,7 @@ const ipAddress2: IIPAddress = {
     IPv6: new Object(),
 }
 
-const ipAddress = (ifnames: any, bool?: boolean) => {
+const ipAddress = (ifnames: any, bool?: boolean): object|any => {
     const tmp = flatten(map(Object.keys(ifnames), ifname => {
         const interfacesType = (type: string) => filter(ifnames[ifname], {
             family: type,

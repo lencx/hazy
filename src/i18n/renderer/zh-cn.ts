@@ -5,6 +5,9 @@ const zhCN = {
     gt: {
         pleaseholder: '请输入要翻译的文本',
     },
+    state: {
+        notdetect: '未检测到',
+    },
 }
 
 export default zhCN

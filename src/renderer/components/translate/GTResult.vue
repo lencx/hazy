@@ -14,17 +14,10 @@
             p(v-html=`item`)
     // hr
     p {{result}}
-    p
-        b IPv4 =>
-            span {{ipAddr.IPv4}}
-    p
-        b IPv6 =>
-            span {{ipAddr.IPv6}}
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import ipAddress from './../../utils/getIP'
 
 @Component
 export default class Notice extends Vue {
@@ -37,11 +30,6 @@ export default class Notice extends Vue {
     get isShow() {
         return this.hasResult = Object.keys(this.result).length === 0
             ? false : true
-    }
-
-    get ipAddr() {
-        const a = JSON.parse(`${localStorage.getItem('OS_INFO')}`)
-        return ipAddress(a.IPS)
     }
 }
 </script>

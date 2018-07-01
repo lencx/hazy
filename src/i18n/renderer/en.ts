@@ -5,6 +5,9 @@ const en = {
     gt: {
         pleaseholder: 'Please enter the text you want to translate',
     },
+    state: {
+        notdetect: 'Not Detected',
+    },
 }
 
 export default en
