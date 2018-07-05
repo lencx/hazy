@@ -165,9 +165,9 @@ export default class Home extends Vue {
             position: fixed;
             margin: 0;
         }
-        .lx-container-content {
-            padding: 20px;
-        }
+        // .lx-container-content {
+        //     padding: 20px;
+        // }
     }
     .menu-item {
         cursor: pointer;

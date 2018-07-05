@@ -1,8 +1,9 @@
 <template lang="pug">
 .lx-dashboard
     StateBar
-    CardItem
-    I18N
+    .dashboard-content
+        CardItem
+        I18N
 </template>
 
 <script lang="ts">
@@ -22,3 +23,17 @@ import I18N from './../common/I18N.vue'
 export default class Dashboard extends Vue {
 }
 </script>
+
+<style lang="scss">
+.lx-dashboard {
+    position: relative;
+}
+.dashboard-content {
+    position: absolute;
+    top: 24px;
+    width: 100%;
+    height: calc(100vh - 24px);
+    overflow-y: auto;
+}
+</style>
+

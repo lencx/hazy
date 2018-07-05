@@ -1,16 +1,17 @@
 <template lang="pug">
 .lx-state-bar
-    v-btn(@click=`ipAddr`)
-        v-icon wifi
-    p
-        b Public IPv4
-        span {{ipv4}}
-    p
-        b Public IPv6
-        span {{ipv6}}
-    p
-        b Local IP
-        span {{local}}
+    v-system-bar(status, color='green', lights-out, dark)
+        v-icon(@click=`ipAddr`) network_wifi
+    .state-desc(v-if=`isOpen`)
+        p
+            b Public IPv4: 
+            span {{ipv4}}
+        p
+            b Public IPv6: 
+            span {{ipv6}}
+        p
+            b Local IP: 
+            span {{local}}
 </template>
 
 <script lang="ts">
@@ -22,7 +23,10 @@ import Debounce from './../../utils/debounce'
 
 @Component
 export default class StateBar extends Vue {
+    private isOpen = false
+
     private ipAddr() {
+        this.isOpen = !this.isOpen
         publicIP.v4()
             .then(v4 => {
                 const netInfo = JSON.parse(`${localStorage.getItem('OS_INFO')}`)
@@ -54,3 +58,21 @@ export default class StateBar extends Vue {
     }
 }
 </script>
+
+<style lang="scss">
+.lx-state-bar {
+    position: fixed;
+    width: 100%;
+    .icon {
+        cursor: pointer;
+    }
+    .state-desc {
+        padding: 20px;
+        position: absolute;
+        top: 24px;
+        background: #000;
+        color: #fff;
+    }
+}
+</style>
+
