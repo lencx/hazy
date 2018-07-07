@@ -7,7 +7,7 @@
         )
             v-icon(v-if=`flag === ''`) language
             img.btn-flag-ico(v-else, :src=`flag`)
-        v-list
+        v-list.i18n-item
             v-list-tile(
                 v-for=`(item, i) in i18nLangs`, :key=`i`,
                 @click=`chooseI18n(item.lang)`,

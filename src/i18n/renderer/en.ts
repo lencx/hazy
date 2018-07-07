@@ -7,6 +7,8 @@ const en = {
     },
     state: {
         notdetect: 'Not Detected',
+        public: 'Public',
+        local: 'Local',
     },
 }
 

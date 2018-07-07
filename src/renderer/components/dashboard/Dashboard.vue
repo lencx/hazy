@@ -31,8 +31,8 @@ export default class Dashboard extends Vue {
 .dashboard-content {
     position: absolute;
     top: 24px;
-    width: 100%;
     height: calc(100vh - 24px);
+    width: 100%;
     overflow-y: auto;
 }
 </style>

@@ -7,6 +7,8 @@ const zhCN = {
     },
     state: {
         notdetect: '未检测到',
+        public: '公共',
+        local: '本地',
     },
 }
 
